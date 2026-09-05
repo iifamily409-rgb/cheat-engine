@@ -30,6 +30,13 @@ jobs:
           wget -q https://services.gradle.org/distributions/gradle-8.4-bin.zip
           unzip -q gradle-8.4-bin.zip
           echo "$GITHUB_WORKSPACE/gradle-8.4/bin" >> $GITHUB_PATH
+      - name: Move files to root
+        run: |
+          if [ -d "cheat-engine" ]; then
+            cp -r cheat-engine/* .
+            cp -r cheat-engine/.github .
+            ls -la
+          fi
       - name: Build APK
         env:
           ANDROID_HOME: ${{ github.workspace }}/android-sdk
